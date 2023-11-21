@@ -15,6 +15,7 @@ public class Tag extends BaseEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(nullable = false, length = 40)
     private String tagName;
 
     @ManyToOne(fetch = FetchType.LAZY)
