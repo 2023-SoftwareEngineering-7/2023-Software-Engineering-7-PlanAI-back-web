@@ -111,4 +111,21 @@ public class UserService {
         targetUser.addFriend(friendMapping);
         return targetUser;
     }
+
+    @Transactional
+    public User deleteFriend(Long userId, Long targetId) {
+        User targetUser = userRepository.findById(userId)
+                .orElseThrow(() -> new IllegalArgumentException("id에 대응되는 유저를 찾을 수 없음"));
+        User targetFriendUser = userRepository.findById(targetId)
+                .orElseThrow(() -> new IllegalArgumentException("id에 대응되는 유저를 찾을 수 없음"));
+
+        targetUser.deleteFriend(targetFriendUser);
+        return targetUser;
+    }
+
+    @Transactional
+    public Long deleteUser(Long id) {
+        userRepository.deleteById(id);
+        return id;
+    }
 }

@@ -4,6 +4,7 @@ import com.softwareengineering.planai.domain.common.BaseEntity;
 import com.softwareengineering.planai.domain.mapping.UserFriend;
 import com.softwareengineering.planai.web.dto.UserUpdateDto;
 import jakarta.persistence.*;
+import java.util.stream.Collectors;
 import lombok.*;
 
 import java.util.ArrayList;
@@ -46,5 +47,11 @@ public class User extends BaseEntity {
 
     public void addFriend(UserFriend mapping) {
         friendList.add(mapping);
+    }
+
+    public void deleteFriend(User target) {
+        friendList = friendList.stream()
+                .filter((element) -> { return element.getFriend().getId() != target.getId(); })
+                .collect(Collectors.toList());
     }
 }

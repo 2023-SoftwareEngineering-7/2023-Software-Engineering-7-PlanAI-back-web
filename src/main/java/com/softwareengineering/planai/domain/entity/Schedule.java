@@ -2,6 +2,7 @@ package com.softwareengineering.planai.domain.entity;
 
 import com.softwareengineering.planai.domain.common.BaseEntity;
 import com.softwareengineering.planai.domain.mapping.ScheduleTag;
+import com.softwareengineering.planai.web.dto.ScheduleUpdateDto;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -38,4 +39,11 @@ public class Schedule extends BaseEntity {
 
     @OneToMany(mappedBy = "schedule")
     private List<ScheduleTag> tagList = new ArrayList<>();
+
+    public void updateScheduleInfo(ScheduleUpdateDto dto) {
+        title = dto.getTitle();
+        description = dto.getDescription();
+        startDate = dto.getStartDate();
+        endDate = dto.getEndDate();
+    }
 }

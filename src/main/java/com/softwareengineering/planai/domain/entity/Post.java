@@ -1,7 +1,9 @@
 package com.softwareengineering.planai.domain.entity;
 
 import com.softwareengineering.planai.domain.common.BaseEntity;
+import com.softwareengineering.planai.web.dto.PostUpdateDto;
 import jakarta.persistence.*;
+import java.util.List;
 import lombok.*;
 
 @Getter
@@ -25,4 +27,12 @@ public class Post extends BaseEntity {
     @JoinColumn(name = "author_id")
     private User author;
 
+    @OneToMany(mappedBy = "post")
+    private List<Comment> commentList;
+
+
+    public void updatePost(PostUpdateDto dto) {
+        title = dto.getTitle();
+        content = dto.getContent();
+    }
 }

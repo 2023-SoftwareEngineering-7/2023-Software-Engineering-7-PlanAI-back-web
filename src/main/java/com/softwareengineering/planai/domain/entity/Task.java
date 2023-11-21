@@ -3,6 +3,7 @@ package com.softwareengineering.planai.domain.entity;
 import com.softwareengineering.planai.domain.common.BaseEntity;
 import com.softwareengineering.planai.domain.enums.Priority;
 import com.softwareengineering.planai.domain.mapping.TaskTag;
+import com.softwareengineering.planai.web.dto.TaskUpdateDto;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -39,4 +40,11 @@ public class Task extends BaseEntity {
 
     @OneToMany(mappedBy = "task")
     private List<TaskTag> tagList = new ArrayList<>();
+
+    public void updateTask(TaskUpdateDto dto) {
+        title = dto.getTitle();
+        description = dto.getDescription();
+        deadline = dto.getDeadline();
+        priority = dto.getPriority();
+    }
 }
