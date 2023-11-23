@@ -5,12 +5,14 @@ import com.softwareengineering.planai.domain.entity.Task;
 import com.softwareengineering.planai.domain.entity.User;
 import com.softwareengineering.planai.web.dto.request.PostRegisterDto;
 import com.softwareengineering.planai.web.dto.request.TaskRegisterDto;
+import com.softwareengineering.planai.web.dto.response.PostResponseDto;
 import com.softwareengineering.planai.web.dto.response.TaskResponseDto;
 import com.softwareengineering.planai.web.dto.update.PostUpdateDto;
 import com.softwareengineering.planai.web.dto.update.TaskUpdateDto;
 import com.softwareengineering.planai.web.service.PostService;
 import com.softwareengineering.planai.web.service.TaskService;
 import com.softwareengineering.planai.web.service.UserService;
+import io.swagger.v3.oas.annotations.Operation;
 import java.util.List;
 import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,18 +37,23 @@ public class PostController {
     }
 
     @GetMapping("/post")
-    public List<Post> getAllPosts() {
-        return postService.findByAll();
+    @Operation(summary="모든 포스트 가져오기", description="테스트 중입니다.")
+    public List<PostResponseDto> getAllPosts() {
+        return postService.findByAll().stream()
+                .map(element -> new PostResponseDto(element))
+                .collect(Collectors.toList());
     }
 
     @GetMapping("/post/{id}")
-    public Post getAllPosts(@PathVariable("id") Long id) {
-        return postService.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 POST id"));
+    @Operation(summary="특정 ID의 포스트 가져오기", description="테스트 중입니다.")
+    public PostResponseDto getPostById(@PathVariable("id") Long id) {
+        return new PostResponseDto(postService.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 POST id")));
     }
 
     @PostMapping("/post")
-    public Post registerPost(PostRegisterDto dto) {
+    @Operation(summary="포스트 등록하기", description="테스트 중입니다.")
+    public PostResponseDto registerPost(@RequestBody PostRegisterDto dto) {
         Post newPost = Post.builder()
                 .title(dto.getTitle())
                 .content(dto.getContent())
@@ -54,15 +61,17 @@ public class PostController {
                         .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 유저 ID")))
                 .build();
 
-        return postService.addPost(newPost);
+        return new PostResponseDto(postService.addPost(newPost));
     }
 
     @PutMapping("/post/{id}")
-    public Post updatePost(@PathVariable("id") Long id, @RequestBody PostUpdateDto dto) {
-        return postService.updatePost(id, dto);
+    @Operation(summary="특정 ID의 포스트 내용 수정하기", description="테스트 중입니다.")
+    public PostResponseDto updatePost(@PathVariable("id") Long id, @RequestBody PostUpdateDto dto) {
+        return new PostResponseDto(postService.updatePost(id, dto));
     }
 
     @DeleteMapping("/post/{id}")
+    @Operation(summary="특정 ID의 포스트 삭제", description="테스트 중입니다.")
     public Long deletePost(@PathVariable("id") Long id) {
         return postService.deletePost(id);
     }

@@ -14,6 +14,7 @@ import com.softwareengineering.planai.web.dto.update.UserUpdateDto;
 import com.softwareengineering.planai.web.service.ScheduleService;
 import com.softwareengineering.planai.web.service.TagService;
 import com.softwareengineering.planai.web.service.UserService;
+import io.swagger.v3.oas.annotations.Operation;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -40,6 +41,7 @@ public class ScheduleController {
 
 
     @GetMapping("/user/{userId}/Schedule")
+    @Operation(summary="특정 유저의 스케줄 정보 모두 가져오기", description="테스트 중입니다.")
     public List<ScheduleResponseDto> getSchedule(@PathVariable(name = "userId") Long userId) {
         User user = userService.findById(userId)
                 .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 유저 ID"));
@@ -52,6 +54,7 @@ public class ScheduleController {
     }
 
     @PostMapping("/user/{userId}/Schedule")
+    @Operation(summary="특정 유저에게 스케줄 정보 등록하기", description="테스트 중입니다.")
     public ScheduleResponseDto registerSchedule(@PathVariable(name = "userId") Long userId, @RequestBody ScheduleRegisterDto dto) {
         User user = userService.findById(userId)
                 .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 유저 ID"));
@@ -69,6 +72,7 @@ public class ScheduleController {
     }
 
     @PutMapping("/user/{userId}/Schedule/{scheduleId}")
+    @Operation(summary="특정 유저의 특정 스케줄 정보 수정", description="테스트 중입니다.")
     public ScheduleResponseDto updateSchedule(@PathVariable("userId") Long id,
                                       @PathVariable("scheduleId") Long scheduleId,
                                       @RequestBody ScheduleUpdateDto dto) {
@@ -76,6 +80,7 @@ public class ScheduleController {
     }
 
     @DeleteMapping("/user/{userId}/Schedule/{scheduleId}")
+    @Operation(summary="특정 유저의 특정 스케줄 정보 삭제", description="테스트 중입니다.")
     public Long deleteSchedule(@PathVariable("userId") Long id, @PathVariable("scheduleId") Long scheduleId) {
         return scheduleService.deleteSchedule(scheduleId);
     }

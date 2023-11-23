@@ -13,6 +13,8 @@ import com.softwareengineering.planai.web.service.ScheduleService;
 import com.softwareengineering.planai.web.service.TagService;
 import com.softwareengineering.planai.web.service.TaskService;
 import com.softwareengineering.planai.web.service.UserService;
+
+import io.swagger.v3.oas.annotations.Operation;
 import java.util.List;
 import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,7 +38,8 @@ public class TaskController {
         this.userService = userService;
     }
 
-    @GetMapping("/user/{userId}/Task")
+    @GetMapping("/user/{userId}/task")
+    @Operation(summary="특정 유저의 모든 태스크 정보 가져오기", description="테스트 중입니다.")
     public List<TaskResponseDto> getTask(@PathVariable(name = "userId") Long userId) {
         User user = userService.findById(userId)
                 .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 유저 ID"));
@@ -48,8 +51,9 @@ public class TaskController {
                 .collect(Collectors.toList());
     }
 
-    @PostMapping("/user/{userId}/Schedule")
-    public TaskResponseDto registerSchedule(@PathVariable(name = "userId") Long userId, @RequestBody TaskRegisterDto dto) {
+    @PostMapping("/user/{userId}/task")
+    @Operation(summary="특정 유저에게 태스크 정보 등록하기", description="테스트 중입니다.")
+    public TaskResponseDto registerTask(@PathVariable(name = "userId") Long userId, @RequestBody TaskRegisterDto dto) {
         User user = userService.findById(userId)
                 .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 유저 ID"));
 
@@ -64,15 +68,17 @@ public class TaskController {
         return new TaskResponseDto(taskService.addTask(schedule, dto.getTagList()));
     }
 
-    @PutMapping("/user/{userId}/Schedule/{scheduleId}")
-    public TaskResponseDto updateSchedule(@PathVariable("userId") Long id,
-                                      @PathVariable("scheduleId") Long taskId,
+    @PutMapping("/user/{userId}/task/{taskId}")
+    @Operation(summary="특정 유저의 특정 태스크 정보 수정하기", description="테스트 중입니다.")
+    public TaskResponseDto updateTask(@PathVariable("userId") Long id,
+                                      @PathVariable("taskId") Long taskId,
                                       @RequestBody TaskUpdateDto dto) {
         return new TaskResponseDto(taskService.updateTaskInfo(taskId, dto));
     }
 
-    @DeleteMapping("/user/{userId}/Schedule/{scheduleId}")
-    public Long deleteSchedule(@PathVariable("userId") Long id, @PathVariable("scheduleId") Long taskId) {
+    @DeleteMapping("/user/{userId}/task/{taskId}")
+    @Operation(summary="특정 유저의 특정 태스크 삭제하기", description="테스트 중입니다.")
+    public Long deleteTask(@PathVariable("userId") Long id, @PathVariable("taskId") Long taskId) {
         return taskService.deleteTask(taskId);
     }
 }
