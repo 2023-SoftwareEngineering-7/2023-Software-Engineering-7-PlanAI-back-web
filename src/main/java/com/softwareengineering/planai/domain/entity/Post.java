@@ -27,10 +27,6 @@ public class Post extends BaseEntity {
     @JoinColumn(name = "author_id")
     private User author;
 
-    @OneToMany(mappedBy = "post")
-    private List<Comment> commentList;
-
-
     public void updatePost(PostUpdateDto dto) {
         title = dto.getTitle();
         content = dto.getContent();

@@ -3,6 +3,7 @@ package com.softwareengineering.planai.web.service;
 import com.softwareengineering.planai.domain.entity.Post;
 import com.softwareengineering.planai.web.dto.update.PostUpdateDto;
 import com.softwareengineering.planai.web.repository.PostRepository;
+import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,7 +20,7 @@ public class PostService {
     }
 
     @Transactional
-    public Post addSchedule(Post task) {
+    public Post addPost(Post task) {
         postRepository.save(task);
         return task;
     }
@@ -27,6 +28,11 @@ public class PostService {
     @Transactional
     public Optional<Post> findById(Long id) {
         return postRepository.findById(id);
+    }
+
+    @Transactional
+    public List<Post> findByAll() {
+        return postRepository.findAll();
     }
 
     @Transactional

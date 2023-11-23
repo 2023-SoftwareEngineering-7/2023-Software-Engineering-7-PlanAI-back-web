@@ -119,6 +119,8 @@ public class UserService {
         User targetFriendUser = userRepository.findById(targetId)
                 .orElseThrow(() -> new IllegalArgumentException("id에 대응되는 유저를 찾을 수 없음"));
 
+        UserFriend uf = targetUser.findFriend(targetFriendUser);
+        userFriendRepository.delete(uf);
         targetUser.deleteFriend(targetFriendUser);
         return targetUser;
     }

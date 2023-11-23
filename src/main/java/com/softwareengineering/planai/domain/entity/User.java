@@ -49,6 +49,15 @@ public class User extends BaseEntity {
         friendList.add(mapping);
     }
 
+    public UserFriend findFriend(User target) {
+        for (UserFriend uf : friendList) {
+            if (uf.getFriend() == target) {
+                return uf;
+            }
+        }
+        return null;
+    }
+
     public void deleteFriend(User target) {
         friendList = friendList.stream()
                 .filter((element) -> { return element.getFriend().getId() != target.getId(); })

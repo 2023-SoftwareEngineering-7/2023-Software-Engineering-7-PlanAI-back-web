@@ -38,7 +38,7 @@ public class Comment extends BaseEntity {
     private Post post;
 
 
-    public void updatePost(String newContent) {
+    public void updateComment(String newContent) {
         content = newContent;
     }
 }
