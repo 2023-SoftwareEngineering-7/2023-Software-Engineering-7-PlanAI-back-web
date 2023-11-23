@@ -2,12 +2,8 @@ package com.softwareengineering.planai.web.service;
 
 import com.softwareengineering.planai.domain.entity.Schedule;
 import com.softwareengineering.planai.domain.entity.User;
-import com.softwareengineering.planai.domain.mapping.UserFriend;
-import com.softwareengineering.planai.web.dto.ScheduleUpdateDto;
-import com.softwareengineering.planai.web.dto.UserUpdateDto;
+import com.softwareengineering.planai.web.dto.update.ScheduleUpdateDto;
 import com.softwareengineering.planai.web.repository.ScheduleRepository;
-import com.softwareengineering.planai.web.repository.UserFriendRepository;
-import com.softwareengineering.planai.web.repository.UserRepository;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;

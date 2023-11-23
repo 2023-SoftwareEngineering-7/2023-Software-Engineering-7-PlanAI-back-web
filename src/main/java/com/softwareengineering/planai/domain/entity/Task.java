@@ -3,7 +3,7 @@ package com.softwareengineering.planai.domain.entity;
 import com.softwareengineering.planai.domain.common.BaseEntity;
 import com.softwareengineering.planai.domain.enums.Priority;
 import com.softwareengineering.planai.domain.mapping.TaskTag;
-import com.softwareengineering.planai.web.dto.TaskUpdateDto;
+import com.softwareengineering.planai.web.dto.update.TaskUpdateDto;
 import jakarta.persistence.*;
 import lombok.*;
 

@@ -1,6 +1,5 @@
-package com.softwareengineering.planai.web.dto;
+package com.softwareengineering.planai.web.dto.update;
 
-import jakarta.persistence.Column;
 import java.time.LocalDateTime;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -11,9 +10,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class ScheduleUpdateDto {
+public class PostUpdateDto {
     private String title;
-    private String description;
-    private LocalDateTime startDate;
-    private LocalDateTime endDate;
+    private String Content;
 }

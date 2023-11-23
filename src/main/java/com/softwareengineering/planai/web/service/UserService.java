@@ -2,7 +2,7 @@ package com.softwareengineering.planai.web.service;
 
 import com.softwareengineering.planai.domain.entity.User;
 import com.softwareengineering.planai.domain.mapping.UserFriend;
-import com.softwareengineering.planai.web.dto.UserUpdateDto;
+import com.softwareengineering.planai.web.dto.update.UserUpdateDto;
 import com.softwareengineering.planai.web.repository.UserFriendRepository;
 import com.softwareengineering.planai.web.repository.UserRepository;
 import java.util.List;

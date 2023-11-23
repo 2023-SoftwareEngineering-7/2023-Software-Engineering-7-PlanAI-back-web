@@ -1,7 +1,7 @@
 package com.softwareengineering.planai.domain.entity;
 
 import com.softwareengineering.planai.domain.common.BaseEntity;
-import com.softwareengineering.planai.web.dto.PostUpdateDto;
+import com.softwareengineering.planai.web.dto.update.PostUpdateDto;
 import jakarta.persistence.*;
 import java.util.List;
 import lombok.*;

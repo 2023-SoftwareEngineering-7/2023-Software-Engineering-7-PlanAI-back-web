@@ -2,7 +2,7 @@ package com.softwareengineering.planai.domain.entity;
 
 import com.softwareengineering.planai.domain.common.BaseEntity;
 import com.softwareengineering.planai.domain.mapping.UserFriend;
-import com.softwareengineering.planai.web.dto.UserUpdateDto;
+import com.softwareengineering.planai.web.dto.update.UserUpdateDto;
 import jakarta.persistence.*;
 import java.util.stream.Collectors;
 import lombok.*;
@@ -30,7 +30,7 @@ public class User extends BaseEntity {
     @Column(nullable = false, length = 20)
     private String phoneNumber;
 
-    @Column(nullable = false, length = 256)
+    @Column(nullable = true, length = 256)
     private String profileImagePath;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)

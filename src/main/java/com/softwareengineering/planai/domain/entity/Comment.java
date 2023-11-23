@@ -1,7 +1,6 @@
 package com.softwareengineering.planai.domain.entity;
 
 import com.softwareengineering.planai.domain.common.BaseEntity;
-import com.softwareengineering.planai.web.dto.PostUpdateDto;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;

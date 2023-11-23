@@ -1,4 +1,4 @@
-package com.softwareengineering.planai.web.dto;
+package com.softwareengineering.planai.web.dto.update;
 
 import com.softwareengineering.planai.domain.enums.Priority;
 import java.time.LocalDateTime;

@@ -1,6 +1,5 @@
-package com.softwareengineering.planai.web.dto;
+package com.softwareengineering.planai.web.dto.update;
 
-import java.time.LocalDateTime;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -10,7 +9,8 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class PostUpdateDto {
-    private String title;
-    private String Content;
+public class UserUpdateDto {
+    private String name;
+    private String phoneNumber;
+    private String email;
 }

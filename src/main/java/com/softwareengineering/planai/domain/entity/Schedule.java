@@ -2,7 +2,7 @@ package com.softwareengineering.planai.domain.entity;
 
 import com.softwareengineering.planai.domain.common.BaseEntity;
 import com.softwareengineering.planai.domain.mapping.ScheduleTag;
-import com.softwareengineering.planai.web.dto.ScheduleUpdateDto;
+import com.softwareengineering.planai.web.dto.update.ScheduleUpdateDto;
 import jakarta.persistence.*;
 import lombok.*;
 

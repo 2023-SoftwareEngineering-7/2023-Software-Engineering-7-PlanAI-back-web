@@ -1,11 +1,8 @@
 package com.softwareengineering.planai.web.service;
 
 import com.softwareengineering.planai.domain.entity.Tag;
-import com.softwareengineering.planai.domain.entity.Task;
 import com.softwareengineering.planai.domain.entity.User;
-import com.softwareengineering.planai.web.dto.TaskUpdateDto;
 import com.softwareengineering.planai.web.repository.TagRepository;
-import com.softwareengineering.planai.web.repository.TaskRepository;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;

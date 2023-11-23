@@ -1,11 +1,8 @@
 package com.softwareengineering.planai.web.service;
 
-import com.softwareengineering.planai.domain.entity.Schedule;
 import com.softwareengineering.planai.domain.entity.Task;
 import com.softwareengineering.planai.domain.entity.User;
-import com.softwareengineering.planai.web.dto.ScheduleUpdateDto;
-import com.softwareengineering.planai.web.dto.TaskUpdateDto;
-import com.softwareengineering.planai.web.repository.ScheduleRepository;
+import com.softwareengineering.planai.web.dto.update.TaskUpdateDto;
 import com.softwareengineering.planai.web.repository.TaskRepository;
 import java.util.List;
 import java.util.Optional;

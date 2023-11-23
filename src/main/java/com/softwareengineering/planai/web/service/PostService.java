@@ -1,13 +1,8 @@
 package com.softwareengineering.planai.web.service;
 
 import com.softwareengineering.planai.domain.entity.Post;
-import com.softwareengineering.planai.domain.entity.Task;
-import com.softwareengineering.planai.domain.entity.User;
-import com.softwareengineering.planai.web.dto.PostUpdateDto;
-import com.softwareengineering.planai.web.dto.TaskUpdateDto;
+import com.softwareengineering.planai.web.dto.update.PostUpdateDto;
 import com.softwareengineering.planai.web.repository.PostRepository;
-import com.softwareengineering.planai.web.repository.TaskRepository;
-import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
