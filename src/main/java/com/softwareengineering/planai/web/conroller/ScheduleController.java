@@ -61,12 +61,12 @@ public class ScheduleController {
 
         Schedule schedule = Schedule.builder()
                 .title(dto.getTitle())
-                .startDate(dto.getStartDate())
-                .endDate(dto.getEndDate())
+                .startDate(dto.getStartDate().atStartOfDay())
+                .endDate(dto.getEndDate().atStartOfDay())
+                .description(dto.getDescription())
                 .owner(user)
+                .tagList(new ArrayList<>())
                 .build();
-
-        scheduleService.addSchedule(schedule, dto.getTagList());
 
         return new ScheduleResponseDto(scheduleService.addSchedule(schedule, dto.getTagList()));
     }
