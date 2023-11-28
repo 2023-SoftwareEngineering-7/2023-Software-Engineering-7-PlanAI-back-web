@@ -15,6 +15,7 @@ import com.softwareengineering.planai.web.service.TaskService;
 import com.softwareengineering.planai.web.service.UserService;
 
 import io.swagger.v3.oas.annotations.Operation;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -61,6 +62,7 @@ public class TaskController {
                 .title(dto.getTitle())
                 .deadline(dto.getDeadline())
                 .description(dto.getDescription())
+                .tagList(new ArrayList<>())
                 .owner(user)
                 .build();
 
