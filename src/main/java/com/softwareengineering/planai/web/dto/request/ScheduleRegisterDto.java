@@ -19,10 +19,10 @@ public class ScheduleRegisterDto {
     private String title;
 
     //@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", timezone = "Asia/Seoul")
-    private LocalDate startDate;
+    private LocalDateTime startDate;
 
     //@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", timezone = "Asia/Seoul")
-    private LocalDate endDate;
+    private LocalDateTime endDate;
 
     private String description;
 

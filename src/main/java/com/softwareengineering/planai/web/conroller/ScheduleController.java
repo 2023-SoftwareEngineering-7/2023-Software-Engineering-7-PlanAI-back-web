@@ -61,8 +61,8 @@ public class ScheduleController {
 
         Schedule schedule = Schedule.builder()
                 .title(dto.getTitle())
-                .startDate(dto.getStartDate().atStartOfDay())
-                .endDate(dto.getEndDate().atStartOfDay())
+                .startDate(dto.getStartDate())
+                .endDate(dto.getEndDate())
                 .description(dto.getDescription())
                 .owner(user)
                 .tagList(new ArrayList<>())

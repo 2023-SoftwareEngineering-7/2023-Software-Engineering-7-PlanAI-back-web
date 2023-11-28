@@ -59,7 +59,7 @@ public class TaskController {
 
         Task schedule = Task.builder()
                 .title(dto.getTitle())
-                .deadline(dto.getDeadline().atStartOfDay())
+                .deadline(dto.getDeadline())
                 .description(dto.getDescription())
                 .owner(user)
                 .build();

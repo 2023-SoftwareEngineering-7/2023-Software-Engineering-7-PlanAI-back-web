@@ -25,7 +25,7 @@ public class TaskRegisterDto {
 
     private String description;
 
-    private LocalDate deadline;
+    private LocalDateTime deadline;
 
     private Priority priority;
 
