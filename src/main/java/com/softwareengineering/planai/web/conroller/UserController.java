@@ -10,6 +10,8 @@ import com.softwareengineering.planai.web.service.UserService;
 
 import io.swagger.v3.oas.annotations.Operation;
 import java.util.List;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -43,7 +45,6 @@ public class UserController {
                         .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 유저 ID"))
         );
     }
-
     @PostMapping("/user/register")
     @Operation(summary="유저 등록하기", description="테스트 중입니다.")
     public UserResponseDto registerUser(@RequestBody UserRegisterDto dto) {
@@ -53,7 +54,10 @@ public class UserController {
                 .phoneNumber(dto.getPhoneNumber())
                 .build();
 
-        return new UserResponseDto(userService.addUser(newUser));
+        return new UserResponseDto(
+                userService.findByNameAndEmail(dto.getName(), dto.getEmail())
+                    .orElse(userService.addUser(newUser))
+        );
     }
 
     @PutMapping("/user/{id}")
