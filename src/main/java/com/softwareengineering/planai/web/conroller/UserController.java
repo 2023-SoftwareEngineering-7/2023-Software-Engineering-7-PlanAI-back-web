@@ -54,10 +54,11 @@ public class UserController {
                 .phoneNumber(dto.getPhoneNumber())
                 .build();
 
-        return new UserResponseDto(
-                userService.findByNameAndEmail(dto.getName(), dto.getEmail())
-                    .orElse(userService.addUser(newUser))
-        );
+        Optional<User> op = userService.findByNameAndEmail(dto.getName(), dto.getEmail());
+        if(op.isPresent()) {
+            return new UserResponseDto(op.get());
+        }
+        return new UserResponseDto(userService.addUser(newUser));
     }
 
     @PutMapping("/user/{id}")
