@@ -76,12 +76,16 @@ public class ScheduleController {
     public ScheduleResponseDto updateSchedule(@PathVariable("userId") Long id,
                                       @PathVariable("scheduleId") Long scheduleId,
                                       @RequestBody ScheduleUpdateDto dto) {
-        return new ScheduleResponseDto(scheduleService.updateScheduleInfo(id, dto));
+        User user = userService.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 유저 ID"));
+        return new ScheduleResponseDto(scheduleService.updateScheduleInfo(user, scheduleId, dto));
     }
 
     @DeleteMapping("/user/{userId}/Schedule/{scheduleId}")
     @Operation(summary="특정 유저의 특정 스케줄 정보 삭제", description="테스트 중입니다.")
     public Long deleteSchedule(@PathVariable("userId") Long id, @PathVariable("scheduleId") Long scheduleId) {
-        return scheduleService.deleteSchedule(scheduleId);
+        User user = userService.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 유저 ID"));
+        return scheduleService.deleteSchedule(user, scheduleId);
     }
 }

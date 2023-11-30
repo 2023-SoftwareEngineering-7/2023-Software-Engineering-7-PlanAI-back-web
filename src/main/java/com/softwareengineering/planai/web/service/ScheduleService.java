@@ -61,16 +61,22 @@ public class ScheduleService {
     }
 
     @Transactional
-    public Schedule updateScheduleInfo(Long id, ScheduleUpdateDto dto) {
-        Schedule targetSchedule = scheduleRepository.findById(id)
+    public Schedule updateScheduleInfo(User user, Long scheduleId, ScheduleUpdateDto dto) {
+        Schedule targetSchedule = scheduleRepository.findById(scheduleId)
                 .orElseThrow(() -> new IllegalArgumentException("id에 대응되는 스케쥴을 찾을 수 없음"));
+        if (user != targetSchedule.getOwner())
+            throw new IllegalArgumentException("자신이 등록한 스케줄이 아님");
         targetSchedule.updateScheduleInfo(dto);
         return targetSchedule;
     }
 
     @Transactional
-    public Long deleteSchedule(Long id) {
-        scheduleRepository.deleteById(id);
-        return id;
+    public Long deleteSchedule(User owner, Long scheduleId) {
+        Schedule targetSchedule = scheduleRepository.findById(scheduleId)
+                .orElseThrow(() -> new IllegalArgumentException("id에 대응되는 스케쥴을 찾을 수 없음"));
+        if (owner != targetSchedule.getOwner())
+            throw new IllegalArgumentException("자신이 등록한 스케줄이 아님");
+        scheduleRepository.deleteById(scheduleId);
+        return scheduleId;
     }
 }

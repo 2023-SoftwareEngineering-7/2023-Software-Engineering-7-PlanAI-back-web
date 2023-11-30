@@ -60,15 +60,21 @@ public class TaskService {
     }
 
     @Transactional
-    public Task updateTaskInfo(Long id, TaskUpdateDto dto) {
-        Task targetSchedule = taskRepository.findById(id)
+    public Task updateTaskInfo(User user, Long id, TaskUpdateDto dto) {
+        Task target = taskRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("id에 대응되는 스케쥴을 찾을 수 없음"));
-        targetSchedule.updateTask(dto);
-        return targetSchedule;
+        if (user != target.getOwner())
+            throw new IllegalArgumentException("자신이 등록한 스케줄이 아님");
+        target.updateTask(dto);
+        return target;
     }
 
     @Transactional
-    public Long deleteTask(Long id) {
+    public Long deleteTask(User user, Long id) {
+        Task target = taskRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("id에 대응되는 스케쥴을 찾을 수 없음"));
+        if (user != target.getOwner())
+            throw new IllegalArgumentException("자신이 등록한 스케줄이 아님");
         taskRepository.deleteById(id);
         return id;
     }

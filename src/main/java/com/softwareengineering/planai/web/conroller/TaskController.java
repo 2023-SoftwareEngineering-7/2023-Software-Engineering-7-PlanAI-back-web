@@ -76,12 +76,16 @@ public class TaskController {
     public TaskResponseDto updateTask(@PathVariable("userId") Long id,
                                       @PathVariable("taskId") Long taskId,
                                       @RequestBody TaskUpdateDto dto) {
-        return new TaskResponseDto(taskService.updateTaskInfo(taskId, dto));
+        User user = userService.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 유저 ID"));
+        return new TaskResponseDto(taskService.updateTaskInfo(user, taskId, dto));
     }
 
     @DeleteMapping("/user/{userId}/task/{taskId}")
     @Operation(summary="특정 유저의 특정 태스크 삭제하기", description="테스트 중입니다.")
     public Long deleteTask(@PathVariable("userId") Long id, @PathVariable("taskId") Long taskId) {
-        return taskService.deleteTask(taskId);
+        User user = userService.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 유저 ID"));
+        return taskService.deleteTask(user, taskId);
     }
 }

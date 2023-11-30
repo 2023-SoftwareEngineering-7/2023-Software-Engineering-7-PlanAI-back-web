@@ -32,11 +32,6 @@ public class UserController {
         this.userService = userService;
     }
 
-//    @GetMapping("/")
-//    public String hello() {
-//        return "Hello";
-//    }
-
     @GetMapping("/user/{id}")
     @Operation(summary="특정 유저 정보 가져오기", description="테스트 중입니다.")
     public UserResponseDto getUser(@PathVariable(name = "id") Long id) {
@@ -83,7 +78,7 @@ public class UserController {
     }
 
     @PostMapping("/user/{userId}/friend/{friendId}")
-    @Operation(summary="특정 유저에게 다른 유저 친구로 추가하기22222", description="테스트 중입니다.")
+    @Operation(summary="특정 유저에게 다른 유저 친구로 추가하기", description="테스트 중입니다.")
     public UserResponseDto addFriend(@PathVariable("userId") Long userId, @PathVariable("friendId") Long friendId) {
         return new UserResponseDto(userService.addFriend(userId, friendId));
     }
