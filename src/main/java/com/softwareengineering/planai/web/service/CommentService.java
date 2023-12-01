@@ -38,16 +38,22 @@ public class CommentService {
     }
 
     @Transactional
-    public Comment updateComment(Long id, String newContent) {
+    public Comment updateComment(Post post, Long id, String newContent) {
         Comment comment = commentRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("id에 대응되는 댓글을 찾을 수 없음"));
+        if(comment.getPost() != post)
+            throw new IllegalArgumentException("요청 Post ID와 댓글이 존재하는 Post ID가 불일치함");
         comment.updateComment(newContent);
         return comment;
     }
 
     @Transactional
-    public Long deleteComment(Long id) {
-        commentRepository.deleteById(id);
+    public Long deleteComment(Post post, Long id) {
+        Comment comment = commentRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("id에 대응되는 댓글을 찾을 수 없음"));
+        if(comment.getPost() != post)
+            throw new IllegalArgumentException("요청 Post ID와 댓글이 존재하는 Post ID가 불일치함");
+        commentRepository.delete(comment);
         return id;
     }
 }

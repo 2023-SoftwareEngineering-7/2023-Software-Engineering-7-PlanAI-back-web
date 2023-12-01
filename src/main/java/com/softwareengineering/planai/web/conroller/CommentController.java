@@ -35,15 +35,6 @@ public class CommentController {
         this.commentService = commentService;
     }
 
-    @GetMapping("/post/{postId}/comment/{commentId}")
-    @Operation(summary="특정 포스트의 특정 ID를 갖는 댓글 가져오기", description="테스트 중입니다.")
-    public CommentResponseDto getAllComment(@PathVariable("postId") Long postId,
-                                            @PathVariable("commentId") Long commentId) {
-
-        return new CommentResponseDto(commentService.findById(commentId)
-                .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 댓글 ID")));
-    }
-
     @GetMapping("/post/{postId}/comment")
     @Operation(summary="특정 포스트의 모든 댓글 가져오기", description="테스트 중입니다.")
     public List<CommentResponseDto> getAllCommentOfPost(@PathVariable("postId") Long postId) {
@@ -54,6 +45,20 @@ public class CommentController {
                 .map(element -> new CommentResponseDto(element))
                 .collect(Collectors.toList());
     }
+
+    @GetMapping("/post/{postId}/comment/{commentId}")
+    @Operation(summary="특정 포스트의 특정 ID를 갖는 댓글 가져오기", description="테스트 중입니다.")
+    public CommentResponseDto getAllComment(@PathVariable("postId") Long postId,
+                                            @PathVariable("commentId") Long commentId) {
+
+        Post post = postService.findById(postId)
+                .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 POST id"));
+
+        return new CommentResponseDto(commentService.findById(commentId)
+                .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 댓글 ID")));
+    }
+
+
 
     @PostMapping("/post/{postId}/comment")
     @Operation(summary="특정 포스트에 댓글 등록", description="테스트 중입니다.")
@@ -74,13 +79,17 @@ public class CommentController {
     public CommentResponseDto updateComment(@PathVariable("postId") Long postId,
                            @PathVariable("commentId") Long commentId,
                            @RequestBody String newContent) {
-        return new CommentResponseDto(commentService.updateComment(commentId, newContent));
+        Post post = postService.findById(postId)
+                .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 POST ID"));
+        return new CommentResponseDto(commentService.updateComment(post, commentId, newContent));
     }
 
     @DeleteMapping("/post/{postId}/comment/{commentId}")
     @Operation(summary="특정 포스트의 특정 댓글 삭제", description="테스트 중입니다.")
     public Long deleteComment(@PathVariable("postId") Long postId,
                            @PathVariable("commentId") Long commentId) {
-        return commentService.deleteComment(commentId);
+        Post post = postService.findById(postId)
+                .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 POST ID"));
+        return commentService.deleteComment(post, commentId);
     }
 }

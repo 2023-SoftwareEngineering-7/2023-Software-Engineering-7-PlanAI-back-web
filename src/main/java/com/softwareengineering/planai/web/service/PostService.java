@@ -45,7 +45,9 @@ public class PostService {
 
     @Transactional
     public Long deletePost(Long id) {
-        postRepository.deleteById(id);
+        Post targetPost = postRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("id에 대응되는 포스트를 찾을 수 없음"));
+        postRepository.delete(targetPost);
         return id;
     }
 }
