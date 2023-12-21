@@ -50,7 +50,7 @@ public class UserService {
     public Optional<User> findByNameAndEmail(String name, String email) {
         List<User> userList = userRepository.findByNameAndEmail(name, email);
         if(userList.size() == 0) {
-            throw new IllegalArgumentException("유저를 찾을 수 없음");
+            return Optional.ofNullable(null);
         }
         if(userList.size() > 1) {
             throw new IllegalStateException("중복된 유저가 DB에 등록되어 있음");
